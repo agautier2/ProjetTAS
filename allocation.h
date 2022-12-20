@@ -20,6 +20,7 @@ void free_heap(void);
 void* heap_malloc(unsigned int size);
 // free a pointer in the heap
 void heap_free(void *ptr);
+void defragmentation(double_linked_list* liste);
 
 double_linked_list* (*strategy)(unsigned int size);
 void set_strategy(double_linked_list* (*strat)(unsigned int size));

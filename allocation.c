@@ -57,12 +57,27 @@ void init_heap(void){
     
 }
 
-void defragmentation(double_linked_list* temp){
+
+void merge_droite(double_linked_list* freebuffer){
+    double_linked_list* temp = freebuffer->next;
+    freebuffer->size +=freebuffer->next->size; 
+    freebuffer->next = temp->next;
+    free(temp);   
+}
     
-    if(temp->next!=NULL){
-        if(temp->filled)
+void defragmentation(double_linked_list* freebuffer){
+    
+    if(freebuffer->next!=NULL){
+        if(freebuffer->next->filled==BUFF_FREE){
+            merge_droite(freebuffer);      
+        }
     }
-    
+
+    if(freebuffer->prev!=NULL){
+        if(freebuffer->prev->filled==BUFF_FREE){
+            merge_droite(freebuffer->prev);      
+        }
+    }  
 }
 
 void heap_free(void *ptr){

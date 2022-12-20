@@ -57,11 +57,29 @@ void init_heap(void){
     
 }
 
-void free_heap(void){
-    free(heap);
-    d_ll_free(buffer_tracker);
+void defragmentation(double_linked_list* temp){
+    
+    if(temp->next!=NULL){
+        if(temp->filled)
+    }
+    
+}
+
+void heap_free(void *ptr){
+    double_linked_list *temp = buffer_tracker;
+    while(temp != NULL){
+        if(temp->ptr == ptr){
+            temp->filled= BUFF_FREE;
+            defragmentation(temp);
+            return;
+        }
+        temp=temp->next;
+    }
+    printf("erreur");
 
 }
+
+
 
 void* heap_malloc(unsigned int size){
     

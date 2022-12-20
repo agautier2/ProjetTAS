@@ -20,37 +20,28 @@ void test_heap_init(){
 void test_heap_malloc_example(){
 
 	init_heap();
-
+	double_linked_list* pointeur = buffer_tracker;
+    buffer_tracker_print();
 	char* p1 = heap_malloc(10);
+	buffer_tracker_print();
+	char* p2 = heap_malloc(15);
+	buffer_tracker_print();
 	/*print_heap();*/
 
-	CU_ASSERT(p1 == (char*) buffer_tracker->ptr+10);
-	CU_ASSERT(p1 == NULL);
-
-	//CU_ASSERT(*(p1+1) != FREE_BLOCK);
-
-	//CU_ASSERT(libre == 10+1);
-	//CU_ASSERT(*(heap + libre) == 116);
-	//CU_ASSERT(*(heap + libre + 1) == FREE_BLOCK);
-
-	//char* p2 = heap_malloc(9);
-	/*print_heap();*/
-
-	//CU_ASSERT(get_index_on_heap(p2) == 12);
-	//CU_ASSERT(get_block_size(p2) == 9);
-	//CU_ASSERT(libre == 21);
-
-	//char* p3 = heap_malloc(5);
-	/*print_heap();*/
-
-	//CU_ASSERT(get_index_on_heap(p3) == 22);
-	//CU_ASSERT(get_block_size(p3) == 5);
-	//CU_ASSERT(libre == 27);
-
-	//char* p4 = heap_malloc(101);
-	/*print_heap();*/
-
-	//CU_ASSERT(p4 == NULL);
+	CU_ASSERT(p1 == (char*) heap);
+	CU_ASSERT(p1 == (char*) pointeur->ptr);
+	CU_ASSERT(pointeur->size == 10);
+	CU_ASSERT(pointeur->filled==BUFF_FILLED);
+	pointeur=pointeur->next;
+	CU_ASSERT(p2 == (char*) pointeur->ptr);
+	CU_ASSERT(p2 == (char*) heap+10);
+	CU_ASSERT(pointeur->size == 15);
+	CU_ASSERT(pointeur->filled==BUFF_FILLED);
+	pointeur=pointeur->next;
+	CU_ASSERT(pointeur->filled==BUFF_FREE);
+	CU_ASSERT(pointeur->size==SIZE_HEAP-10-15);
+	CU_ASSERT(pointeur->ptr==(char*)heap+10+15);
+	
 }
 
 

@@ -6,9 +6,22 @@
 #include <stdio.h>
 #include <time.h>
 
+
+void buffer_tracker_print(void){
+    
+    double_linked_list *temp = buffer_tracker;
+    while(temp != NULL){
+        printf("[%ld][%d][%c]→ ",(char*)temp->ptr-(char*)heap,temp->size,temp->filled);
+        temp=temp->next; 
+           
+    }
+    printf("\n");
+}
+
+
 void ecrire_date_heure_adresse(void* ptr, int size)
 {
-  printf("test");
+
   // Ouverture du fichier en mode écriture
   FILE * fp = fopen("allocation.txt", "a");
 
@@ -75,7 +88,7 @@ void* heap_malloc(unsigned int size){
                 d_ll_push_elem(temp,new_elem);
             }
             ecrire_date_heure_adresse(new_elem,size);
-            return new_elem->ptr;
+            return temp->ptr;
             
         }
         temp=temp->next;

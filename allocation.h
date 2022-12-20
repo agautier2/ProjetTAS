@@ -9,9 +9,10 @@ void* heap;
 
 double_linked_list* buffer_tracker;
 
-#define BUFF_FREE 0
-#define BUFF_FILLED 1
+#define BUFF_FREE 'F'
+#define BUFF_FILLED 'B'
 
+void buffer_tracker_print(void);
 void init_heap(void);
 void free_heap(void);
 
